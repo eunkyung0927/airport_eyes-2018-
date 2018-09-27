@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Airport_eyes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+
+<body>
+    <!-- header -->
+    <nav class="navbar navbar-light header">
+        <div class="navbar-brand clock" id="dateClock"></div>
+        <div class="navbar-brand clock" id="timeClock"></div>
+    </nav>
+
+    <!-- main section -->
+    <main role="main" class="container-fluid main">
+        <div class="row">
+            <div class="col-6 dataBox">
+                <p class="title">Departures</p>
+                <div class="dataSection" id="departures"></div>
+            </div>
+            <div class="col-6 dataBox">
+                <p class="title">Arrivals</p>
+                <div class="dataSection" id="arrivals"></div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 dataBox">
+                <p class="title">Airline Cancellation & Delay Data
+
+                    <button type="button" class="btn btn-link linkbtn">Delay</button>
+                    <button type="button" class="btn btn-link linkbtn">Cancel</button>
+                </p>
+                
+                <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-info ">
+                          <input type="radio" checked autocomplete="off"> Departure
+                        </label>
+                        <label class="btn btn-info">
+                          <input type="radio" checked autocomplete="off"> Arrival
+                        </label>
+                </div>
+            <div class="dataSection" id="cancel-delay"></div>
+        </div>
+            <div class="col-6 dataBox">
+                <p class="title">Airport Congestion</p>
+                <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-info ">
+                          <input type="radio" checked autocomplete="off"> Terminal1
+                        </label>
+                        <label class="btn btn-info">
+                          <input type="radio" checked autocomplete="off"> Terminal2
+                        </label>
+                </div>
+                <div class="dataSection" id="congestion"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- library -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+        crossorigin="anonymous"></script>
+
+    <!-- custom js -->
+    <script src="main.js"></script>
+    <script>
+        printClock();
+
+        
+    </script>
+</body>
+
+</html>
