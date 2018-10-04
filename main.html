@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Airport_eyes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link href="c3-0.6.7/c3.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -27,36 +28,33 @@
             <div class="col-6 dataBox">
                 <p class="title">Arrivals</p>
                 <div class="dataSection" id="arrivals"></div>
-
             </div>
         </div>
         <div class="row">
             <div class="col-6 dataBox">
                 <p class="title">Airline Cancellation & Delay Data
-
                     <button type="button" class="btn btn-link linkbtn">Delay</button>
                     <button type="button" class="btn btn-link linkbtn">Cancel</button>
                 </p>
-                
                 <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-info ">
-                          <input type="radio" checked autocomplete="off"> Departure
-                        </label>
-                        <label class="btn btn-info">
-                          <input type="radio" checked autocomplete="off"> Arrival
-                        </label>
+                    <label class="btn btn-info ">
+                        <input type="radio" checked autocomplete="off"> Departure
+                    </label>
+                    <label class="btn btn-info">
+                        <input type="radio" checked autocomplete="off"> Arrival
+                    </label>
                 </div>
-            <div class="dataSection" id="cancel-delay"></div>
-        </div>
+                <div class="dataSection" id="cancel-delay"></div>
+            </div>
             <div class="col-6 dataBox">
                 <p class="title">Airport Congestion</p>
                 <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-info ">
-                          <input type="radio" checked autocomplete="off"> Terminal1
-                        </label>
-                        <label class="btn btn-info">
-                          <input type="radio" checked autocomplete="off"> Terminal2
-                        </label>
+                    <label class="btn btn-info " id ="t1btn" >
+                        <input type="radio" checked autocomplete="on"> Terminal1
+                    </label>
+                    <label class="btn btn-info" id ="t2btn">
+                        <input type="radio" checked autocomplete="off"> Terminal2
+                    </label>
                 </div>
                 <div class="dataSection" id="congestion"></div>
             </div>
@@ -69,14 +67,15 @@
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js" charset="utf-8"></script>
+    <script src="c3-0.6.7/c3.min.js"></script>
 
     <!-- custom js -->
-    <script src="main.js"></script>
-    <script>
-        printClock();
 
-        
-    </script>
+    <script src="clock.js"></script>
+    <script src="table.js"></script>
+    <script src="maketable.js"></script>
+    <script src="congestion.js"></script>
 </body>
 
 </html>
