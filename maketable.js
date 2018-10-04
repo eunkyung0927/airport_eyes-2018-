@@ -2,8 +2,8 @@ var objecttype={
   0: "dep_airplane",
   1: "airplane"
 };
-var startDate = Date.now() - 3600000;
-
+var startDate = Date.now() - 7200000;
+var endDate = Date.now() + 86412345;
 var queryString ={
   0: encodeURIComponent(JSON.stringify({
     objectType: objecttype[0],
@@ -13,7 +13,9 @@ var queryString ={
   1: encodeURIComponent(JSON.stringify({
     objectType: objecttype[1],
     startDate: startDate,
+    endDate: endDate,
     ascending: true
+    
   }))
 };
 
