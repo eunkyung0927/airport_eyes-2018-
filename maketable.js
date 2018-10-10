@@ -1,68 +1,93 @@
-var objecttype={
-  0: "dep_airplane",
-  1: "airplane"
-};
-var startDate = Date.now() - 7200000;
-var endDate = Date.now() + 86412345;
-var queryString ={
-  0: encodeURIComponent(JSON.stringify({
-    objectType: objecttype[0],
-    startDate: startDate,
-    ascending: true
-  })),
-  1: encodeURIComponent(JSON.stringify({
-    objectType: objecttype[1],
-    startDate: startDate,
-    endDate: endDate,
-    ascending: true
-    
-  }))
-};
+/**
+ * 
+ * @param {String} objectType objectType의 이름
+ * @param {Object} option 
+ * 
+ * example- 
+ * 
+ * urlOption : {
+    startDate : curDate,
+    endDate : Date.now() - 7200000
+  },
+  tableOption : {
+    columnIndex : [13, 3, 8, 7, 10],
+    headLabel : ['TIME', 'FROM', 'FLIGHT', 'TERMINAL', 'REMARKS'],
+    targetElementId : "arrivals"
+  }
+ */
+function maketable(objectType, option) {
+  var tb;
 
-function maketable(option) {
-  var depHead = ['TIME', 'DESTINATION', 'FLIGHT', 'CHECK IN', 'REMARKS'];
-  var arrHead = ['TIME', 'FROM', 'FLIGHT', 'TERMINAL', 'REMARKS'];
-  var depBody = [], arrBody = [];
-  var basicurl = "http://dev.wizeye.io:1344/V2/TableData?siteId=b26233b869a034b33e2a7550e4f75001&query=";
-  
   $.ajax({
-    url: basicurl + option,
+    url: "http://dev.wizeye.io:1344/V2/TableData?siteId=b26233b869a034b33e2a7550e4f75001&query=" + makeTableOption(objectType, option.urlOption),
     dataType: "json",
+    async: false,
     success: function (d) {
-      function dep(){
-        var depcontext = d.data.dep_airplane.rows;
-        for (var i = 0; i < depcontext.length; i++) {
-          var deparr =  depcontext[i];
-          var arr2 = [deparr[17],deparr[7],deparr[11],deparr[9],deparr[13]];
-          depBody.push(arr2);
-        }
-          var $el = document.getElementById('departures');
-          var tb = new TablePlayer($el, depHead, depBody, 10, 2);
-          tb.show();
-      };
-      function arr(){
-          var context = d.data.airplane.rows;
-          for (var i = 0; i < context.length; i++) {
-            var arrarr =  context[i];
-            var arr = [arrarr[13], arrarr[3], arrarr[8], arrarr[7], arrarr[10]];
-            arrBody.push(arr);
+        var tableOption = option.tableOption;
+        var $el = document.getElementById(tableOption.targetElementId);
+        var context = d.data[objectType].rows;
+        var tableBody = [];
+        
+        for (var i = 0, len = context.length; i < len; i++) {
+          var rowData = context[i];
+          var rowTempArr = [];
+          for(var j = 0, len2 = tableOption.columnIndex.length; j < len2; j++){ 
+            var singleElement = rowData[tableOption.columnIndex[j]];
+            rowTempArr.push(singleElement);
           }
-            var $el2 = document.getElementById('arrivals');
-            var tb2 = new TablePlayer($el2, arrHead, arrBody, 10, 2);
-            tb2.show();
-      };
-      if(option==queryString[0]){
-          dep();
+          tableBody.push(rowTempArr);
         }
-      if(option==queryString[1]){
-          arr();
-      }
-    },
+
+        tb = new TablePlayer($el, tableOption.headLabel,tableBody,10,2);
+      },    
     error: function (e) {
       console.log(e.responseText)
     }
   });
+
+  return tb;
 };
-for(a=0;a<2;a++){
-  maketable(queryString[a]);
+
+function makeTableOption(objectType, urlOption){
+  if(objectType === undefined) {
+    throw 'objectType is required';
+  }
+
+  var option = {};
+
+  option.objectType = objectType;
+  option.startDate = urlOption.startDate || beforecurDate;
+  option.ascending = urlOption.ascending || true;
+  if(urlOption.endDate !== undefined) option.endDate = urlOption.endDate;
+
+  return encodeURIComponent(JSON.stringify(option));
 }
+var beforecurDate = Date.now() - 2*60*60*1000;
+var aftercurDate = Date.now() + 24*60*60*1000;
+// make table
+var depTable = maketable("dep_airplane", {
+  urlOption : {
+    startDate : beforecurDate,
+    endDate : aftercurDate
+  },
+  tableOption : {
+    columnIndex : [17, 8, 12, 10, 14],
+    headLabel : ['TIME', 'DESTINATION', 'FLIGHT', 'CHECK IN', 'REMARKS'],
+    targetElementId : "departures"
+  }
+});
+
+var arrTable = maketable("airplane",  {
+  urlOption : {
+    startDate : beforecurDate,
+    endDate : aftercurDate
+  },
+  tableOption : {
+    columnIndex : [13, 3, 8, 7, 10],
+    headLabel : ['TIME', 'FROM', 'FLIGHT', 'TERMINAL', 'REMARKS'],
+    targetElementId : "arrivals"
+  }
+});
+
+depTable.show();
+arrTable.show();
