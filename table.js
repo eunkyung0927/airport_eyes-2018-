@@ -28,8 +28,8 @@ var TablePlayer = (function () {
     var _getPartialData = function () {
         var startIdx = (this.curPage - 1) * this.showCount;
         var endIdx = this.curPage < this.maxPage ? this.curPage * this.showCount : this.data.length;
-
         return this.data.slice(startIdx, endIdx);
+        
       },
 
       _createHead = function () {
@@ -83,9 +83,10 @@ var TablePlayer = (function () {
 
       _destroy = function () {
         this.tableContainer.remove();
-      },
+      };
 
-      show = function () {
+    return {
+      show: function () {
         var self = this;
         _render.call(this);
 
@@ -96,15 +97,10 @@ var TablePlayer = (function () {
           }, self.interval * 1000);
         }  
       },
-
-      remove = function () {
+      hide: function () {
         clearInterval(this.setInterval);
         _destroy.call(this);
       }
-
-    return {
-      show: show,
-      hide: remove
     }
   })();
 

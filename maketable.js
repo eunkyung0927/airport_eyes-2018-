@@ -64,6 +64,7 @@ function makeTableOption(objectType, urlOption){
 }
 var beforecurDate = Date.now() - 2*60*60*1000;
 var aftercurDate = Date.now() + 24*60*60*1000;
+
 // make table
 var depTable = maketable("dep_airplane", {
   urlOption : {
@@ -77,13 +78,14 @@ var depTable = maketable("dep_airplane", {
   }
 });
 
+
 var arrTable = maketable("airplane",  {
   urlOption : {
     startDate : beforecurDate,
     endDate : aftercurDate
   },
   tableOption : {
-    columnIndex : [13, 3, 8, 7, 10],
+    columnIndex : [16, 6, 11, 10, 13],
     headLabel : ['TIME', 'FROM', 'FLIGHT', 'TERMINAL', 'REMARKS'],
     targetElementId : "arrivals"
   }
