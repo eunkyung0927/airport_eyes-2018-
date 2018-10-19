@@ -37,7 +37,7 @@ var TablePlayer = (function () {
         var headData = this.head;
         var innerData = '';
         for (var i = 0, len = headData.length; i < len; i++) {
-          innerData += `<th scope="col">${headData[i]}</th>`;
+          innerData += `<th scope="col" class="thead">${headData[i]}</th>`;
         }
 
         tableHead.innerHTML = '<tr>' + innerData + '</tr>';
