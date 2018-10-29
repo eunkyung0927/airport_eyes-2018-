@@ -1,0 +1,76 @@
+.wrapper {
+  /* z-index는 position 속성이 설정된 엘리먼트에 대해서만 의미를 갖는다. 기본이 0. 숫자 클 수록 사용자로 부터 가깝다. */
+  z-index:1;
+  position: relative;
+  opacity : 0.9;
+}
+.navbar{
+  height: 70px;
+}
+.wrapper:after{
+  /* after는 가상엘리먼트를 의미. content속성(css로 내용을 생성하는 역할)이 있는 경우레만 출력됨. */
+  background-image:url(../img/background.jpg);
+  top:0;
+  left:0;
+  position:absolute;
+  background-size:100%;
+  opacity:0.3!important;
+  z-index:-1;
+  content:"";
+  width:100%;
+  height:100%;
+} 
+body{
+  background-color: rgb(230, 230, 230);
+  opacity : 0.95;
+}
+.header {
+  height: 7
+}
+.header .clock {
+  line-height: 50px;
+  color: rgb(70, 70, 70);
+  font-size: 25px;
+  text-align: center;
+}
+
+.main {
+  height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  background-color: #0a0a0a17
+}
+
+.main .row {
+  flex: 1;
+}
+
+.main .dataBox {
+  display: flex;
+  flex-direction: column;
+}
+.table{
+  table-layout: fixed;
+}
+
+.main .dataBox .dataSection {
+  flex: 0.8;
+  font-size: 10px;
+  /* font-size: 0.4vh; */
+}
+
+table {
+  table-layout: fixed;
+  word-wrap: break-word;
+  text-align: center;
+}
+.thead {
+  text-align: center;
+}
+
+.title {
+  flex: 1;
+  font-weight:bold;
+  font-size: 18px;
+}
+
