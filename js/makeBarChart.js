@@ -3,6 +3,7 @@ var getFlightData = function (objectType, interval, targetElementId, rightOrder)
   var indexNum = [];
   $.ajax({
     url: 'http://waste.me:1344/V2/TableData?siteId=n3n&query=' + makeChartOption(objectType),
+    //http://waste.me:1344/V2/TableData?siteId=n3n&query=%7b%22objectType%22%3a%22monthlyFlightInfo%22%7d
     datatype: "json",
     success: function (d) {
       var originalData = d.data[objectType].rows;
@@ -175,6 +176,6 @@ function makeChart(data, showCount, targetElementId) {
 }
 // execute main()
 var depRightOrder = ["airline", "delayRate", "cancelRate"];
-var arrRightOrder = ["airline", "delayRate"]
+var arrRightOrder = ["airline", "delayRate"];
 getFlightData("dep_monthlyFlightInfo", 7, "departuredelay", depRightOrder);
 getFlightData("monthlyFlightInfo", 7, "arrivaldelay", arrRightOrder);
